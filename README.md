@@ -4,7 +4,6 @@ Temporal-HL is a motion-aware symbolic extension of framewise hand notation. Thi
 
 - source code for Temporal-HL label generation
 - training and evaluation scripts
-- paper draft and experiment summaries
 - lightweight paper tables and text assets
 
 Heavy reproducibility assets are intentionally **not** tracked in Git. They must live under:
@@ -38,7 +37,6 @@ Tracked in Git:
 
 - code
 - scripts
-- paper draft and summaries
 - lightweight markdown tables
 
 Stored only in `temporal_hl_cache/`:
@@ -48,6 +46,7 @@ Stored only in `temporal_hl_cache/`:
 - training checkpoints
 - run logs
 - generated bitmap figures
+- internal research notes and drafting materials
 
 ## Current Cached Assets Expected
 
@@ -94,11 +93,7 @@ python train_token_reconstruction_v2.py \
   2. downloading `temporal_hl_cache/`
   3. placing `temporal_hl_cache/` at the repo root
 
-## Main Paper Files
+## Public Paper Assets
 
-- `paper_draft.md`
-- `results_summary.md`
-- `reviewer_risk.md`
-- `mock_review.md`
 - `paper_assets/main_tables.md`
 - `paper_assets/appendix_tables.md`
