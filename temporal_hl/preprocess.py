@@ -55,7 +55,7 @@ def write_processed_record(output_dir: Path, record: dict) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Generate Temporal-HL labels from raw annotations.")
     parser.add_argument("--data-root", type=Path, default=Path("data"))
-    parser.add_argument("--output-root", type=Path, default=Path("temporal_hl_cache/artifacts/temporal_hl"))
+    parser.add_argument("--output-root", type=Path, default=Path("temporal_hl_cache/artifacts/temporal_hl_smoke"))
     args = parser.parse_args()
 
     manifest = []
