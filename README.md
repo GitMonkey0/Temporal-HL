@@ -57,15 +57,8 @@ Stored only in `temporal_hl_cache/`:
 
 ## Quick Start
 
-### 1. Preprocess
 
-```bash
-python -m temporal_hl.preprocess \
-  --annotations temporal_hl_cache/data/train/annotations.jsonl \
-  --output-root temporal_hl_cache/artifacts/temporal_hl
-```
-
-### 2. Train notation translation
+### 1. Train notation translation
 
 ```bash
 python train_temporal_hl.py \
@@ -74,7 +67,7 @@ python train_temporal_hl.py \
   --save-dir temporal_hl_cache/runs/temporal_hl
 ```
 
-### 3. Train token-to-motion reconstruction
+### 2. Train token-to-motion reconstruction
 
 ```bash
 python train_token_reconstruction_v2.py \
