@@ -1,0 +1,70 @@
+\begin{thebibliography}{9}
+\providecommand{\natexlab}[1]{#1}
+
+\bibitem[{Cao et~al.(2021)Cao, Hidalgo, Simon, Wei, and
+  Sheikh}]{cao2021openpose}
+Cao, Z.; Hidalgo, G.; Simon, T.; Wei, S.; and Sheikh, Y. 2021.
+\newblock OpenPose: Realtime Multi-Person 2D Pose Estimation Using Part
+  Affinity Fields.
+\newblock \emph{IEEE Transactions on Pattern Analysis and Machine
+  Intelligence}, 43(1): 172--186.
+
+\bibitem[{Chen et~al.(2025)Chen, Zhang, Lakshmikanth, Fang, Shao, Wetzstein,
+  Li, and Adeli}]{chen2025language}
+Chen, C.; Zhang, J.; Lakshmikanth, S.~K.; Fang, Y.; Shao, R.; Wetzstein, G.;
+  Li, F.-F.; and Adeli, E. 2025.
+\newblock The Language of Motion: Unifying Verbal and Non-verbal Language of 3D
+  Human Motion.
+\newblock In \emph{Proceedings of the IEEE/CVF Conference on Computer Vision
+  and Pattern Recognition}.
+
+\bibitem[{Fu et~al.(2025)}]{fu2025gigahands}
+Fu, Y.; et~al. 2025.
+\newblock GigaHands: A Massive Annotated Dataset of Bimanual Hand Activities.
+\newblock In \emph{Proceedings of the IEEE/CVF Conference on Computer Vision
+  and Pattern Recognition}.
+
+\bibitem[{Li et~al.(2024)Li, Yang, Xing, Yu, and Zhang}]{li2024hl}
+Li, L.; Yang, W.; Xing, J.; Yu, X.; and Zhang, X. 2024.
+\newblock Translating Motion to Notation: Hand Labanotation for Intuitive and
+  Comprehensive Hand Movement Documentation.
+\newblock In \emph{Proceedings of the 32nd ACM International Conference on
+  Multimedia}.
+
+\bibitem[{Moon et~al.(2020)Moon, Yu, Wen, Shiratori, and
+  Lee}]{moon2020interhand}
+Moon, G.; Yu, S.; Wen, H.; Shiratori, T.; and Lee, K.~M. 2020.
+\newblock InterHand2.6M: A Dataset and Baseline for 3D Interacting Hand Pose
+  Estimation from a Single RGB Image.
+\newblock In \emph{European Conference on Computer Vision}.
+
+\bibitem[{Romero, Tzionas, and Black(2017)}]{romero2017mano}
+Romero, J.; Tzionas, D.; and Black, M.~J. 2017.
+\newblock Embodied Hands: Modeling and Capturing Hands and Bodies Together.
+\newblock \emph{ACM Transactions on Graphics}, 36(6).
+
+\bibitem[{Yan, Yu, and Zhou(2025)}]{yan2025labanlab}
+Yan, M.; Yu, X.; and Zhou, Y. 2025.
+\newblock LabanLab: An Interactive Choreographical System with
+  Labanotation-Motion Preview.
+\newblock In \emph{Eurographics}.
+
+\bibitem[{Zhang et~al.(2025)Zhang, Li, Ye, Peng, Golyanik, Theobalt, and
+  Park}]{zhang2025bimart}
+Zhang, Y.; Li, Y.; Ye, Y.; Peng, X.~B.; Golyanik, V.; Theobalt, C.; and Park,
+  H.~S. 2025.
+\newblock BimArt: A Unified Approach for the Synthesis of 3D Bimanual
+  Interaction with Articulated Objects.
+\newblock In \emph{Proceedings of the IEEE/CVF Conference on Computer Vision
+  and Pattern Recognition}.
+
+\bibitem[{Zimmermann et~al.(2019)Zimmermann, Ceylan, Yang, Russell, Argus, and
+  Brox}]{zimmermann2019freihand}
+Zimmermann, C.; Ceylan, D.; Yang, J.; Russell, B.; Argus, M.; and Brox, T.
+  2019.
+\newblock FreiHAND: A Dataset for Markerless Capture of Hand Pose and Shape
+  From Single RGB Images.
+\newblock In \emph{Proceedings of the IEEE/CVF International Conference on
+  Computer Vision}, 813--822.
+
+\end{thebibliography}

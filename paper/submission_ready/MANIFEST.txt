@@ -1,0 +1,27 @@
+AAAI 2027 anonymous submission package for Temporal Hand Labanotation
+
+Contents
+- AnonymousSubmission2027.tex
+- AnonymousSubmission2027.pdf
+- AnonymousSubmission2027.bbl
+- references.bib
+- aaai2027.sty
+- aaai2027.bst
+- Figures/temporal_hl_overview.pdf
+- Figures/temporal_hl_key_results.pdf
+- ReproducibilityChecklist.tex
+- ReproducibilityChecklist.pdf
+- SupplementaryAppendix.tex
+- SupplementaryAppendix.pdf
+
+Build
+- Main paper: latexmk -pdf -interaction=nonstopmode -halt-on-error AnonymousSubmission2027.tex
+- Checklist: latexmk -pdf -interaction=nonstopmode -halt-on-error ReproducibilityChecklist.tex
+- Supplement: latexmk -pdf -interaction=nonstopmode -halt-on-error SupplementaryAppendix.tex
+
+Status
+- Main anonymous paper compiles successfully under the extracted AAAI 2027 AuthorKit.
+- Reproducibility checklist compiles successfully as a standalone PDF.
+- Supplementary appendix compiles successfully as a standalone PDF.
+- Current main-paper PDF is 6 pages, letter size, PDF 1.5.
+- Final submission bundle excludes exploratory render snapshots and other debug-only artifacts.

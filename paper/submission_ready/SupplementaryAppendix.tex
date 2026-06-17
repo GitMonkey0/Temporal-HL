@@ -1,0 +1,336 @@
+\documentclass[letterpaper]{article}
+\usepackage[submission]{aaai2027}
+\usepackage[hyphens]{url}
+\usepackage{graphicx}
+\usepackage{listings}
+\urlstyle{rm}
+\def\UrlFont{\rm}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\frenchspacing
+
+\setcounter{secnumdepth}{0}
+
+\title{Supplementary Appendix for\\Temporal Hand Labanotation}
+\author{Anonymous Submission}
+\affiliations{}
+
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    breakatwhitespace=false,
+    columns=fullflexible,
+    keepspaces=true
+}
+
+\newcommand{\ppath}[1]{\path{#1}}
+\newcommand{\pathentry}[2]{\noindent\textbf{#1}\\\ppath{#2}\par}
+\newcommand{\cmdentry}[2]{\noindent\textbf{#1}\\\texttt{python }\ppath{#2}\par}
+
+\begin{document}
+\maketitle
+
+\section{Purpose}
+
+This appendix records the concrete artifacts, protocols, and settings used by
+the anonymous submission. It is intended as a reproducibility companion to the
+main paper and a claim-to-evidence map for the reported results.
+
+\section{Directory Layout}
+
+All paths below are relative to the project root unless stated otherwise.
+
+\pathentry{Submission package root:}{paper/submission_ready/}
+\pathentry{Main paper file:}{paper/submission_ready/AnonymousSubmission2027.tex}
+\pathentry{Checklist file:}{paper/submission_ready/ReproducibilityChecklist.tex}
+\pathentry{Generated experiment artifacts:}{experiments/generated/}
+\pathentry{Executable scripts:}{tools/*.py}
+\pathentry{Base dataset root:}{/opt/tiger/InterHand}
+
+\section{Claim-to-Evidence Map}
+
+\textbf{Claim 1:} THL improves symbolic structure over a flat HL-style sequence
+representation.
+\begin{itemize}
+    \item Main-paper evidence: Table 1A and the ablation table
+    \item Source artifacts:
+    \ppath{experiments/generated/topline_evidence_bundle.json}
+    and
+    \ppath{experiments/generated/temporal_representation_ablation_report.json}
+\end{itemize}
+
+\textbf{Claim 2:} THL yields substantially stronger local editability than
+matched proxy token spaces.
+\begin{itemize}
+    \item Main-paper evidence: Table 1A
+    \item Source artifacts:
+    \ppath{experiments/generated/local_edit_audit.json},
+    \ppath{experiments/generated/learned_token_proxy_report.json}
+\end{itemize}
+
+\textbf{Claim 3:} THL improves interaction-conditioned preservation under the
+same held-out protocol.
+\begin{itemize}
+    \item Main-paper evidence: Table 1B and the statistical discussion in
+    Results
+    \item Source artifacts:
+    \ppath{experiments/generated/topline_evidence_bundle.json},
+    \ppath{experiments/generated/interaction_realized_significance_report.json},
+    \ppath{experiments/generated/interaction_realized_feasible_left_repair_bundle.json}
+\end{itemize}
+
+\textbf{Claim 4:} Short transition chunks are the strongest minimal temporal
+upgrade.
+\begin{itemize}
+    \item Main-paper evidence: Table 1C and the ablation table
+    \item Source artifacts:
+    \ppath{experiments/generated/interaction_realized_closing_chunk_transfer_val_only.json},
+    \ppath{experiments/generated/interaction_realized_opening_chunk_transfer_val_only.json},
+    \ppath{experiments/generated/temporal_representation_ablation_report.json}
+\end{itemize}
+
+The ablation table should be read within the learned sequence-model family
+rather than as a direct replacement for every value in the main result table.
+The main result table mixes structure, editability, and interaction-preservation
+audits, whereas the ablation isolates which temporal channels matter inside the
+matched sequence-model comparison.
+
+\section{Temporal HL Export And Preprocessing}
+
+The submission does not introduce a new raw image dataset. Instead, it reuses
+the HL-derived symbolic export already built from InterHand2.6M and related
+annotations in the current workspace.
+
+\pathentry{Temporal export entry point:}{tools/build_temporal_hl.py}
+\pathentry{Train split used in symbolic pretraining:}{experiments/generated/temporal_hl_train.json}
+\pathentry{Validation split used for support construction and tuning:}{experiments/generated/temporal_hl_val.json}
+\pathentry{Test split used for final evaluation:}{experiments/generated/temporal_hl_test.json}
+
+The main preprocessing stages are:
+\begin{itemize}
+    \item conversion from joint annotations to symbolic hand states
+    \item temporal windowing for learned sequence models
+    \item support-bank construction for symbolic intervention and chunk-transfer audits
+    \item slice filtering for hard interaction and feasible-subset evaluations
+\end{itemize}
+
+\section{Main Paper Numbers And Their Source Artifacts}
+
+\pathentry{Topline evidence bundle used for Table 1:}{experiments/generated/topline_evidence_bundle.json}
+\pathentry{Ablation report used for Table 2:}{experiments/generated/temporal_representation_ablation_report.json}
+\pathentry{Locality audit:}{experiments/generated/local_edit_audit.json}
+\pathentry{Interaction significance report:}{experiments/generated/interaction_realized_significance_report.json}
+\pathentry{Feasible interaction repair bundle:}{experiments/generated/interaction_realized_feasible_left_repair_bundle.json}
+\pathentry{Broader closing chunk-transfer report:}{experiments/generated/interaction_realized_closing_chunk_transfer_val_only.json}
+\pathentry{Broader opening chunk-transfer report:}{experiments/generated/interaction_realized_opening_chunk_transfer_val_only.json}
+
+\section{Main-Paper Values}
+
+The paper reports the following principal values from the artifacts above.
+\begin{itemize}
+    \item structure: flat symbolic sequence $0.6923$ vs grouped symbolic sequence $0.8974$
+    \item locality: symbolic locality $0.3553$ vs semantic proxy $0.0945$ and continuous proxy $0.0848$
+    \item hard interaction, strict full slice: closing/opening $0.0250/0.0533$
+    \item hard interaction, corrected support: closing/opening $0.1807/0.1812$
+    \item feasible interaction subset: closing/opening $0.6392/0.6497$
+    \item preserve-side repair: closing/opening $0.6582/0.6497$
+    \item chunk transfer: closing/opening $0.7785/0.7197$ against fixed-edge $0.7025/0.6306$
+\end{itemize}
+
+\section{Protocol Fairness Notes}
+
+The central comparisons in the main paper are designed to isolate the effect of
+the representation rather than the effect of a stronger downstream solver. The
+fairness conditions used throughout are:
+\begin{itemize}
+    \item the symbol inventory is unchanged when THL is compared against flat
+    HL-style symbolic baselines
+    \item the downstream operator family is held fixed within each audit
+    (local intervention, interaction-conditioned preservation, or chunk
+    transfer)
+    \item support banks are built from validation data rather than test data
+    \item final reporting is performed on held-out unseen-subject test splits
+    \item learned-token controls use matched split families and stronger
+    training budgets rather than weaker geometric heuristics
+\end{itemize}
+
+This means the reported gains should be interpreted as gains in notation
+structure and editability under matched operator strength, not as gains from a
+privileged retrieval or repair mechanism.
+
+\section{Statistical Evidence}
+
+The paper reports significance only for the interaction-conditioned frontier,
+where frame-level variance is most consequential. The corresponding artifact is
+\ppath{experiments/generated/interaction_realized_significance_report.json}.
+
+The reported results are:
+\begin{itemize}
+    \item on the full hard slice, corrected support improves closing by
+    $+0.156$ with 95\% CI $[0.127, 0.186]$ and opening by $+0.128$ with
+    95\% CI $[0.101, 0.156]$; paired permutation tests are below $10^{-4}$ in
+    both cases
+    \item on the feasible interaction subset, preserve-side repair improves
+    closing by $+0.184$ with 95\% CI $[0.108, 0.259]$ and opening by $+0.166$
+    with 95\% CI $[0.108, 0.223]$; the corresponding $p$-values are
+    $5\times10^{-5}$ and below $10^{-4}$
+\end{itemize}
+
+The sequence-accuracy comparisons additionally use three random seeds
+$\{0,1,2\}$ for learned sequence models, while symbolic intervention and chunk
+transfer are deterministic once the split and support bank are fixed.
+
+\section{Claim Boundary}
+
+The submission makes a deliberately narrow claim. It does not claim that THL is
+a universal solution for every downstream hand-motion task, nor that the paper
+exhausts every possible evaluation of symbolic hand notation. The supported
+claim is instead:
+\begin{itemize}
+    \item HL can be upgraded from framewise notation into a temporal symbolic
+    motion representation
+    \item this upgrade improves structure, local editability, and
+    interaction-conditioned preservation under matched held-out protocols
+    \item the strongest minimal upgrade is grouped state plus short transition
+    motifs, rather than heavier temporal channels
+\end{itemize}
+
+This is the scope the main paper is written to defend, and the artifacts listed
+above are selected accordingly.
+
+\section{Protocol Sketch}
+
+For clarity, the overall evaluation protocol used in the paper can be summarized
+as follows.
+\begin{enumerate}
+    \item Build temporal symbolic train/validation/test splits from the
+    HL-derived export.
+    \item Train the learned sequence models on the train split and select
+    hyperparameters on validation.
+    \item Build support banks only from validation data.
+    \item Keep the downstream operator family fixed for the comparison being
+    audited.
+    \item Evaluate on the held-out test split, including unseen-subject slices
+    and the interaction-conditioned subsets used in the main paper.
+\end{enumerate}
+
+This sketch is intentionally high level: the exact entry points and artifact
+files are listed below, while the main paper focuses on the representation claim
+rather than on engineering workflow detail.
+
+\section{Common Reviewer Checks}
+
+The present submission is designed to rule out three common alternative
+interpretations.
+\begin{itemize}
+    \item \textbf{``This is just a stronger recognizer.''} The paper does not
+    evaluate THL only through framewise prediction; it evaluates structure,
+    locality, and interaction-conditioned preservation under fixed downstream
+    operator classes.
+    \item \textbf{``The gain comes from a larger symbol set.''} The grouped
+    state component preserves the original HL symbol inventory; the measured
+    gain comes from reorganizing the object and adding short transition motifs.
+    \item \textbf{``The gain comes from a privileged solver.''} Support banks,
+    operator families, and held-out split protocols are matched across the
+    comparisons used for the main claims.
+\end{itemize}
+
+\section{Final Hyperparameters Reported In The Main Paper}
+
+\textbf{Learned temporal symbolic sequence models.}
+\begin{itemize}
+    \item seeds: $\{0,1,2\}$
+    \item window size: $32$
+    \item stride: $16$
+    \item hidden dimension: $128$
+    \item pretraining epochs: $20$
+    \item finetuning epochs: $20$
+\end{itemize}
+
+\textbf{Matched learned-token controls.}
+\begin{itemize}
+    \item compared token codebooks: $32$ and $64$
+    \item final reported codebook size: $64$
+    \item max codebook frames: $100{,}000$
+    \item pretraining window span: $186$
+    \item pretraining step: $96$
+    \item pretraining epochs: $120$
+    \item finetuning epochs: $120$
+\end{itemize}
+
+\textbf{Chunk transfer.}
+\begin{itemize}
+    \item tested chunk lengths: $2, 3, 4$
+    \item broader opening result is stable across all three lengths
+    \item broader closing result is reported at the strongest tested setting
+\end{itemize}
+
+\section{Representative Commands}
+
+\textbf{Matched old-HL vs temporal-HL boundary check.}
+\cmdentry{Command:}{tools/build_oldhl_temporal_matched_report.py}
+
+\textbf{Grouped/repair structural analysis.}
+\cmdentry{Command 1:}{tools/build_current_code_symbolic_frontier.py}
+\cmdentry{Command 2:}{tools/build_representation_risk_bundle.py}
+
+\textbf{Broader feasible closing chunk transfer.}
+\cmdentry{Command:}{tools/build_interaction_realized_closing_chunk_transfer.py}
+
+\textbf{Broader feasible opening chunk transfer.}
+\cmdentry{Command:}{tools/build_interaction_realized_opening_chunk_transfer_val_only.py}
+
+\textbf{Sequence-model training family.}
+\cmdentry{Command 1:}{tools/train_symbolic_pretrain.py}
+\cmdentry{Command 2:}{tools/train_symbolic_pretrain_grouped.py}
+\cmdentry{Command 3:}{tools/train_joint_token_baseline.py}
+
+\section{Script Inventory Used Directly By The Submission}
+
+The submission relies primarily on the following executable entry points.
+
+\pathentry{Entry point 1:}{tools/build_temporal_hl.py}
+\pathentry{Entry point 2:}{tools/build_current_code_symbolic_frontier.py}
+\pathentry{Entry point 3:}{tools/build_representation_risk_bundle.py}
+\pathentry{Entry point 4:}{tools/build_topline_evidence_bundle.py}
+\pathentry{Entry point 5:}{tools/build_oldhl_temporal_matched_report.py}
+\pathentry{Entry point 6:}{tools/build_interaction_realized_closing_chunk_transfer.py}
+\pathentry{Entry point 7:}{tools/build_interaction_realized_opening_chunk_transfer_val_only.py}
+\pathentry{Entry point 8:}{tools/train_symbolic_pretrain.py}
+\pathentry{Entry point 9:}{tools/train_symbolic_pretrain_grouped.py}
+\pathentry{Entry point 10:}{tools/train_joint_token_baseline.py}
+\pathentry{Entry point 11:}{tools/build_paper_figures.py}
+
+\section{Selection Criteria}
+
+The final settings used in the main paper were not chosen post hoc from all
+available experiments. We used the following rule:
+\begin{itemize}
+    \item for matched learned controls, keep the setting with the strongest
+    validation-side sequence accuracy under the same split protocol
+    \item for chunk transfer, keep the setting with the strongest corrected
+    feasible-slice score, but only if the effect remains stable across the
+    tested chunk lengths or support-bank variants
+    \item keep only evidence that directly supports the paper's central
+    representation claim under the held-out protocol
+\end{itemize}
+
+\section{Environment}
+
+The current environment used to generate the final paper bundle is:
+\begin{itemize}
+    \item Python $3.11.2$
+    \item PyTorch $2.9.1$
+    \item CUDA-enabled execution path in the current training scripts
+    \item NVIDIA A100 80GB PCIe GPUs in the active machine environment
+\end{itemize}
+
+\section{Anonymity And Scope}
+
+The submission package contains only anonymous paper assets, bibliography
+files, figures, checklist material, and this appendix. Internal rendering
+snapshots, exploratory debug images, and unrelated workspace artifacts are not
+part of the final submission bundle. The present appendix documents only the
+artifacts required to understand or reproduce the reported anonymous results.
+
+\end{document}

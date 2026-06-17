@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Editors
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+
+# Large generated experiment outputs
+experiments/generated/
+
+# Local packaging artifacts
+*.zip
+
+# LaTeX temporary files
+*.aux
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+
+# Optional local virtual environments
+.venv/
+venv/
