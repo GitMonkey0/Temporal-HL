@@ -1,7 +1,7 @@
 # Temporal Hand Labanotation
 
 This repository contains the code, experiment notes, and paper materials for
-the Temporal Hand Labanotation project.
+the Temporal Hand Labanotation project. 
 
 ## Repository Layout
 
